@@ -1,0 +1,39 @@
+To use nfscrack with a new kernel:
+
+1. Obtain the Linux 2.4.22 kernel sources (the code was written for 2.4.22, but
+was also tested on 2.4.24).
+
+2. In the configuration, set the NFS server to be compiled as a module.
+
+3. Change the Makefile in the linux-2.4.22 directory to include -DNFSCRACK in the CFLAGS.
+
+4. Copy the files from the archive into the linux-2.4.22/fs/nfsd directory.
+
+5. Compile the kernel as usual (with 'make modules', 'make modules_install', etc).
+
+6. Boot the machine with the new kernel.
+
+7. insmod kbdb.o (this is the database that nfscrack uses)
+
+8. /sbin/modprobe -a nfsd
+
+9. /etc/init.d/nfs start
+
+10. You can now write into /proc/fs/nfs/nfscrack to set the random file handle
+size (a multiple of 4 between 4 and 64.
+
+11. Export and use the NFS server as usual.
+
+----------------------------------------------
+
+Modifying nfscrack:
+
+Since the NFS server was compiled into the kernel as a module (see above), the
+kernel does not need to be recompiled for changes to take effect.
+
+1. make modules
+
+2. Copy the new nfsd.o file to /lib/modules/2.4.22/kernel/fs/nfsd/nfsd.o
+
+3. proceed from step 7 above (assuming the kbdb and nfsd modules are not
+currently insmodded).

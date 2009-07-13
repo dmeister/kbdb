@@ -1,0 +1,7 @@
+12/15/03  Mohammad Nayyer Zubair
+
+- move database pointers to the superblock
+- make ported qsort work. The qsort call is in mp/mp_sync.c
+- better way to get a new inode number for a new file, right now we are going through the entire 
+  dirent table and finding out the max number.
+- have some arrays in some functions, maybe we can make them dynamic  
